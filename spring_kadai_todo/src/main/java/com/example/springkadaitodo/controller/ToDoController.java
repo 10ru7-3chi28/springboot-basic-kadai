@@ -1,0 +1,30 @@
+package com.example.springkadaitodo.controller;
+
+import org.hibernate.mapping.List;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.springkadaitodo.entity.ToDo;
+import com.example.springkadaitodo.service.ToDoService;
+
+
+@Controller
+public class ToDoController {
+	private final ToDoService todoService;
+	
+	public ToDoController(ToDoService todoService) {
+		this.todoService = todoService;
+	}
+	
+	@RequestMapping("/todo")
+	
+	public String ToDo(Model model) {
+		List<ToDo> todos = todoService.getAllToDos();
+		
+		model.addAllAttributes("todos",todos);
+		
+		return "todoView";
+	}
+
+}
