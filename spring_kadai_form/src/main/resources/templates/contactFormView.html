@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+	
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring Bootの基礎を学ぼう</title>
+<style>
+  .form-row {
+    display: flex;
+    align-items: center; 
+    margin-bottom: 10px;
+  }
+
+  .form-label {
+    width: 150px;       
+    text-align: left;
+  }
+
+  .form-input {
+    flex-grow: 1;       
+    display: flex;
+    justify-content: center;  
+  }
+
+  .form-input input,
+  .form-input textarea {
+    width: 100%;       
+    max-width: 400px;   
+  }
+
+  
+  .error-message {
+    color: red;
+    margin-left: 150px; 
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+
+<body>
+	<h2>お問い合わせフォーム</h2>
+	
+	<form th:action="@{/confirm}" method="post" th:object="${form}">
+	<label for="name">お名前</label>
+	<input type="text" th:field="*{name}"><br>
+	<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color: red;"></div>
+	
+	<label for="name">メールアドレス</label>
+	<input type="text" th:field="*{email}"><br>
+	<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
+	
+	<label for="message">お問い合わせ内容</label>
+	<textarea th:field="*{message}" cols="30" rows="10"></textarea>
+	<div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" style="color: red;"></div>
+	
+	<button type="submit">送信</button>
+	</form>
+</body>
+</html>
